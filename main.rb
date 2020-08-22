@@ -12,7 +12,6 @@ DB = Database.new
 
 Telegram::Bot::Client.run(TOKEN) do |bot|
   bot.listen do |message|
-    ProcessService.new(message).call
-    InformService.new(bot, message.chat.id).call
+    ProcessService.new(message, bot).call
   end
 end

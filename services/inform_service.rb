@@ -1,9 +1,10 @@
 class InformService
-  attr_reader :bot, :chat_id
+  attr_reader :bot, :chat_id, :text
 
-  def initialize(bot, chat_id)
+  def initialize(bot, chat_id, text)
     @bot = bot
     @chat_id = chat_id
+    @text = text
   end
 
   def call
@@ -15,11 +16,7 @@ class InformService
   def inform_user
     bot.api.sendMessage(
       chat_id: chat_id,
-      text: message_text
+      text: text
     )
-  end
-
-  def message_text
-    'Debit saved'
   end
 end

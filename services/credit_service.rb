@@ -1,4 +1,4 @@
-class DebitService
+class CreditService
   attr_reader :count, :currency
 
   def initialize(count, currency)
@@ -7,6 +7,6 @@ class DebitService
   end
 
   def call
-    ::DebitEntity.new({count: count, currency: currency}).save
+    ::CreditEntity.new({count: count, currency: currency}).save
   end
 end
