@@ -15,7 +15,7 @@ Telegram::Bot::Client.run(TOKEN) do |bot|
   bot.listen do |message|
     case message.text
     when 'balance'
-      Balance.new(message.chat.id, bot).call
+      Balance.new(message, bot).call
     else
       ProcessService.new(message, bot).call
     end

@@ -2,11 +2,12 @@ require_relative '../db/database'
 require_relative '../presenters/balance_presenter'
 
 class Balance
-  attr_reader :chat_id, :bot
+  attr_reader :chat_id, :bot, :user_id
 
-  def initialize(chat_id, bot)
-    @chat_id = chat_id
+  def initialize(message, bot)
+    @chat_id = message.chat.id
     @bot = bot
+    @user_id = message.from.id
   end
 
   def call
@@ -21,7 +22,7 @@ class Balance
   end
 
   def count(type)
-    entities = Database.new.instance_variable_get(:@db)["#{type}_entities".to_sym]
+    entities = Database.new.instance_variable_get(:@db)["#{type}_entities".to_sym].where(telegram_id: user_id)
     entities = entities.all.group_by { |e| e[:currency] }
     entities.map do |key, value|
       sum = value.inject(0) { |s, hash| s + hash[:count] }

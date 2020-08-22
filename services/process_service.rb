@@ -1,14 +1,15 @@
 class ProcessService
-  attr_reader :message, :bot, :chat_id
+  attr_reader :message, :bot, :chat_id, :user_id
 
   def initialize(message, bot)
     @message = message.text
     @chat_id = message.chat.id
     @bot = bot
+    @user_id = message.from.id
   end
 
   def call
-    operation_service.new(count, currency).call
+    operation_service.new(count, currency, user_id).call
     InformService.new(bot, chat_id, text).call
   end
 
