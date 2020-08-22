@@ -7,7 +7,7 @@ class BalancePresenter
 
   def call
     data.map do |key, value|
-      "#{value} #{key}"
+      "#{value.to_f} #{key}"
     end.join("\n").to_s
   end
 end

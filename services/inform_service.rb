@@ -16,7 +16,7 @@ class InformService
   def inform_user
     bot.api.sendMessage(
       chat_id: chat_id,
-      text: text
+      text: text.empty? ? 'fail' : text
     )
   end
 end
