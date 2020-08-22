@@ -9,6 +9,5 @@ class DebitService
 
   def call
     ::DebitEntity.new({count: count, currency: currency}).save
-    # recalculate_balance
   end
 end
