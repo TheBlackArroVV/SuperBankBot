@@ -1,13 +1,15 @@
 class ProcessService
-  attr_reader :message, :chat_id
+  attr_reader :message, :bot, :chat_id
 
-  def initialize(message)
+  def initialize(message, bot)
     @message = message.text
     @chat_id = message.chat.id
+    @bot = bot
   end
 
   def call
-    operation_service.new(count, currency, chat_id).call
+    operation_service.new(count, currency).call
+    InformService.new(bot, chat_id, text).call
   end
 
   private
@@ -17,7 +19,7 @@ class ProcessService
   end
 
   def operation_service
-    message_arguments.first == '+' ? DebitService : nil
+    message_arguments.first == '+' ? DebitService : CreditService
   end
 
   def count
@@ -26,5 +28,9 @@ class ProcessService
 
   def currency
     message_arguments.last
+  end
+
+  def text
+    message_arguments.first == '+' ? 'Debit saved' : 'Credit saved'
   end
 end
