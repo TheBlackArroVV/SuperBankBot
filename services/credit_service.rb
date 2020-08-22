@@ -7,6 +7,6 @@ class CreditService
   end
 
   def call
-    ::CreditEntity.new({count: count, currency: currency}).save
+    ::CreditEntity.new({ count: count, currency: currency }).save
   end
 end

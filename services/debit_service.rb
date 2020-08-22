@@ -7,6 +7,6 @@ class DebitService
   end
 
   def call
-    ::DebitEntity.new({count: count, currency: currency}).save
+    ::DebitEntity.new({ count: count, currency: currency }).save
   end
 end
